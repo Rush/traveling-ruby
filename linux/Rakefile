@@ -42,8 +42,8 @@ end
 
 ARCHITECTURES.each do |arch|
   RUBY_VERSIONS.each do |ruby_version|
-    package = "traveling-ruby-#{VERSION}-#{ruby_version}-linux-#{arch}.tar.xz"
-    gem_dir = "#{VERSION}-#{ruby_version}-linux-#{arch}"
+    package = "traveling-ruby-#{ruby_version}-linux-#{arch}.tar.xz"
+    gem_dir = "#{ruby_version}-linux-#{arch}"
 
     task :package => "package:#{ruby_version}:#{arch}"
     task :runtime => "runtime:#{ruby_version}:#{arch}"

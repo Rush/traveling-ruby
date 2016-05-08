@@ -110,7 +110,7 @@ if [[ "$RUBY_PACKAGE" != "" ]]; then
 		"./lib/ruby/gems/$RUBY_COMPAT_VERSION/gems/bundler-$BUNDLER_VERSION" \
 		"./lib/ruby/gems/$RUBY_COMPAT_VERSION/specifications/bundler-$BUNDLER_VERSION.gemspec" \
 		"./lib/ruby/gems/$RUBY_COMPAT_VERSION/specifications/default"
-	xz --compress --force -9 --extreme "$OUT"
+	xz --x86 --compress --force -9 --extreme "$OUT"
 fi
 
 if [[ "$GEM_NATIVE_EXTENSIONS_DIR" != "" ]]; then
@@ -131,7 +131,7 @@ if [[ "$GEM_NATIVE_EXTENSIONS_DIR" != "" ]]; then
 					-C "$BUILD_OUTPUT_DIR/lib/ruby/gems" \
 					"$RUBY_COMPAT_VERSION/deplibs/$GEM_PLATFORM/$GEM_NAME_WITHOUT_VERSION"
 			fi
-			xz --compress --force -9 --extreme "$OUT"
+			xz --x86 --compress --force -9 --extreme "$OUT"
 		done
 	fi
 fi
