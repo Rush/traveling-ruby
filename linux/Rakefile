@@ -40,6 +40,8 @@ task "clean-all" => :clean do
   sh "sudo rm -rf runtime"
 end
 
+sh "./setup-docker-image"
+
 ARCHITECTURES.each do |arch|
   RUBY_VERSIONS.each do |ruby_version|
     package = "traveling-ruby-#{ruby_version}-linux-#{arch}.tar.xz"
@@ -61,13 +63,11 @@ ARCHITECTURES.each do |arch|
     desc "Build binaries for Ruby #{ruby_version} #{arch}"
     task "build:#{ruby_version}:#{arch}" => "output/#{ruby_version}-#{arch}/bin"
 
-    file "runtime/#{ruby_version}-#{arch}/ok" => ["setup-runtime", "internal/setup-runtime", "internal/setup-runtime-inside-mock", "Dockerfile"] do
+    file "runtime/#{ruby_version}-#{arch}/ok" => ["setup-runtime", "internal/setup-runtime", "internal/setup-runtime-inside-mock"] do
       sh "mkdir -p runtime/#{ruby_version}-#{arch}"
-      sh "./setup-docker-image"
       sh "./setup-runtime -a #{arch} -r #{ruby_version} runtime/#{ruby_version}-#{arch}"
       touch "runtime/#{ruby_version}-#{arch}/ok"
     end
-
 
     file(package => "output/#{ruby_version}-#{arch}/bin") do
       sh "../shared/package -r #{package} output/#{ruby_version}-#{arch}"

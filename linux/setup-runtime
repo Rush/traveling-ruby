@@ -92,6 +92,6 @@ docker run \
 	/system/setup-runtime
 
 CID=$(cat image.cid)
-docker commit $CID phusion/traveling-ruby-linux:$ARCHITECTURE
+docker commit $CID phusion/traveling-ruby-builder
 docker rm $CID
 rm image.cid
